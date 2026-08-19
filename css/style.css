@@ -1,0 +1,456 @@
+/* ============================================================
+   css/style.css — Lost & Found Portal Stylesheet
+   ============================================================ */
+
+/* --- CSS Variables (easy color theme changes) --- */
+:root {
+    --primary:    #2563eb;   /* Blue – main brand color */
+    --primary-dk: #1d4ed8;   /* Darker blue for hover states */
+    --danger:     #dc2626;   /* Red – for delete / lost items */
+    --success:    #16a34a;   /* Green – for found items / resolve */
+    --warning:    #d97706;   /* Amber – for resolved badges */
+    --bg:         #f1f5f9;   /* Light grey page background */
+    --card:       #ffffff;   /* White card background */
+    --text:       #1e293b;   /* Dark slate text */
+    --muted:      #64748b;   /* Muted secondary text */
+    --border:     #e2e8f0;   /* Subtle border color */
+    --radius:     10px;      /* Rounded corners */
+    --shadow:     0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- Navigation Bar --- */
+nav {
+    background: var(--primary);
+    color: #fff;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav .brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+nav .brand span { color: #bfdbfe; }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+nav ul li a {
+    color: #e0f2fe;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+nav ul li a:hover { color: #fff; text-decoration: none; }
+
+nav ul li a.btn-nav {
+    background: #fff;
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+nav ul li a.btn-nav:hover { background: #dbeafe; }
+
+/* --- Page Container --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.container-sm {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Page Title --- */
+.page-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+}
+
+.page-subtitle {
+    color: var(--muted);
+    margin-bottom: 1.8rem;
+    font-size: 0.95rem;
+}
+
+/* --- Cards --- */
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    border: 1px solid var(--border);
+}
+
+/* --- Item Grid --- */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.item-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.item-card-header {
+    padding: 1rem 1.2rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-card-body {
+    padding: 0.5rem 1.2rem 1rem;
+    flex: 1;
+}
+
+.item-card-footer {
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--border);
+    background: #f8fafc;
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.item-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.item-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+.item-location {
+    font-size: 0.88rem;
+    color: var(--text);
+}
+
+.item-location::before { content: "📍 "; }
+
+/* --- Badges --- */
+.badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-lost     { background: #fee2e2; color: var(--danger); }
+.badge-found    { background: #dcfce7; color: var(--success); }
+.badge-active   { background: #dbeafe; color: var(--primary); }
+.badge-resolved { background: #fef3c7; color: var(--warning); }
+
+/* --- Forms --- */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+textarea.form-control { resize: vertical; min-height: 90px; }
+
+select.form-control { cursor: pointer; }
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    font-family: inherit;
+    text-align: center;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary  { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dk); }
+
+.btn-danger   { background: var(--danger); color: #fff; }
+.btn-danger:hover { background: #b91c1c; }
+
+.btn-success  { background: var(--success); color: #fff; }
+.btn-success:hover { background: #15803d; }
+
+.btn-outline  { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+
+.btn-sm { padding: 0.4rem 0.9rem; font-size: 0.82rem; }
+
+.btn-full { width: 100%; display: block; }
+
+/* --- Alerts / Flash Messages --- */
+.alert {
+    padding: 0.85rem 1.1rem;
+    border-radius: 7px;
+    margin-bottom: 1.2rem;
+    font-size: 0.93rem;
+    font-weight: 500;
+}
+
+.alert-success { background: #dcfce7; color: #166534; border-left: 4px solid var(--success); }
+.alert-error   { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--danger); }
+.alert-info    { background: #dbeafe; color: #1e40af; border-left: 4px solid var(--primary); }
+
+/* --- Filter/Search Bar --- */
+.filter-bar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    background: var(--card);
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.filter-bar input,
+.filter-bar select {
+    flex: 1;
+    min-width: 160px;
+    padding: 0.6rem 0.9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-size: 0.92rem;
+    font-family: inherit;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* --- Hero Banner (Dashboard) --- */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem; }
+.hero p  { opacity: 0.85; font-size: 1rem; }
+
+/* --- Stats Row --- */
+.stats-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.stat-box {
+    flex: 1;
+    min-width: 130px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.stat-box .stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.stat-box .stat-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+}
+
+/* --- My Posts Action Buttons --- */
+.post-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+/* --- Auth Card (login/register) --- */
+.auth-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border);
+}
+
+.auth-card h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+}
+
+.auth-card .auth-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border);
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.8rem; }
+    .hero h1 { font-size: 1.3rem; }
+    .container { padding: 1.2rem 1rem; }
+    .items-grid { grid-template-columns: 1fr; }
+    .stats-row { gap: 0.7rem; }
+}
+
+/* --- Empty State --- */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+}
+
+.empty-state .empty-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+.empty-state p { font-size: 1rem; }
+
+/* --- Divider --- */
+hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.2rem 0;
+}
+
+/* --- File upload styling --- */
+input[type="file"].form-control {
+    padding: 0.5rem;
+    cursor: pointer;
+}
